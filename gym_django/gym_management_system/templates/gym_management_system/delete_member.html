@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<header>
+    <!-- parent -->
+        <nav class ="nav">
+            <!-- child 1 -->
+            <div class = "nav-list-1">
+            <i class="fa-solid fa-dumbbell"></i>
+            <a id="goBackLink" href="{% url 'home' %}"><h1>Django Gym</h1></a>
+            </div>
+        </nav>
+</header>
+<body class="body-create-form">
+<!-- Form for member deletion -->
+<div class="delete-form-container">
+    <form method="post" class="delete-form">
+        {% csrf_token %}
+        <p class="delete-message">Are you sure you want to delete this member?</p>
+        <input type="submit" value="Delete" class="delete-button">
+    </form>
+
+    <a href="{% url 'home' %}" class="cancel-link">Cancel</a>
+</div>
+</body>
+{% endblock %}

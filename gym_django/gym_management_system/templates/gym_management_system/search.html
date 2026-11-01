@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header>
+    <!-- parent -->
+        <nav class ="nav">
+            <!-- child 1 -->
+            <div class = "nav-list-1">
+            <i class="fa-solid fa-dumbbell"></i>
+            <a id="goBackLink" href="{% url 'home' %}"><h1>Django Gym</h1></a>
+            </div>
+            <!-- child 2 -->
+            <div class = "nav-list-2">
+                <form id="searchForm" method="POST" action="{% url 'search_member' %}">
+                    {% csrf_token %}
+                    <input id="searchInput" type="search" placeholder="Search Member" aria-label="Search" name="searched">
+                    <button id="searchButton" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+</header>
+<center>
+    {% if searched %}
+    <h1>You Searched For <span style = "color: #0aee85;">{{ searched }}</span></h1>
+    <br/>
+    <table>
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>Last Fee Date</th>
+                <th>Attendence Status</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                <th>Member Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+               
+                <td>igf_00{{ member.id }}</td>
+                <td>{{ member.member_name }}</td>
+                <td>{{ member.starting_date|date:"M. d, Y" }}</td>
+                <td><a href="{% url 'monthly_attendance' member.id %}" class="actions"><i class="fa-solid fa-calendar-days"></i></a></td>
+                <td><a href="{% url 'delete_member' member.id %}" class="actions"><i class="fa-solid fa-xmark"></i></a></td>
+                <td><a href="{% url 'update_member' member.id %}" class="actions-1"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="{% url 'member_detail' member.id %}" class="actions-1"><i class="fa-solid fa-circle-info"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h1>Your search doesn't appear</h1>
+
+    {% endif %}
+</center> 
+
+{% endblock %}

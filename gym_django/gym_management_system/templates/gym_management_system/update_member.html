@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<header>
+    <!-- parent -->
+        <nav class ="nav">
+            <!-- child 1 -->
+            <div class = "nav-list-1">
+            <i class="fa-solid fa-dumbbell"></i>
+            <a id="goBackLink" href="{% url 'home' %}"><h1>Django Gym</h1></a>
+            </div>
+        </nav>
+</header>
+
+<body class="body-create-form">
+    <div class="form-container">
+        <h2 class="form-title">Update a Member</h2>
+        <form method="post" class="custom-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.member_name.id_for_label }}">Member Name:</label>
+                {{ form.member_name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.parent_name.id_for_label }}">Parent Name:</label>
+                {{ form.parent_name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.cnic_no.id_for_label }}">Cnic no:</label>
+                {{ form.cnic_no }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.DOB.id_for_label }}">DOB:</label>
+                <input type="date" name="{{ form.DOB.name }}" value="{{ form.DOB.value|date:'Y-m-d' }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.mobile_number.id_for_label }}">Mobile number:</label>
+                {{ form.mobile_number }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.occupation.id_for_label }}">Occupation:</label>
+                {{ form.occupation }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.address.id_for_label }}">Address:</label>
+                {{ form.address }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.reference.id_for_label }}">Reference:</label>
+                {{ form.reference }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.gender.id_for_label }}">Gender:</label>
+                {{ form.gender }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.blood_group.id_for_label }}">Blood group:</label>
+                {{ form.blood_group }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.member_timings.id_for_label }}">Member timings:</label>
+                {{ form.member_timings }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.height_cm.id_for_label }}">Height (cm):</label>
+                {{ form.height_cm }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.weight_kg.id_for_label }}">Weight (KG):</label>
+                {{ form.weight_kg }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.admission_fee.id_for_label }}">Admission Fee:</label>
+                {{ form.admission_fee }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.monthly_fee.id_for_label }}">Monthly Fee:</label>
+                {{ form.monthly_fee }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.trainer_name.id_for_label }}">Trainer Name:</label>
+                {{ form.trainer_name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.trainer_fee.id_for_label }}">Trainer Fee:</label>
+                {{ form.trainer_fee }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.starting_date.id_for_label }}">Starting Date:</label>
+                <input type="date" name="{{ form.starting_date.name }}" value="{{ form.starting_date.value|date:'Y-m-d' }}">
+            </div>
+            <div class="form-group">
+                <label for="{{ form.admission_date.id_for_label }}">Admission Date:</label>
+                <input type="date" name="{{ form.admission_date.name }}" value="{{ form.admission_date.value|date:'Y-m-d' }}">
+            </div>
+            <div class="form-submit">
+                <input type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</body>
+
+
+{% endblock %}

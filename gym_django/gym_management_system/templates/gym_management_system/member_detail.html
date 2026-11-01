@@ -1,0 +1,115 @@
+<!-- gym_management_system/templates/gym_management_system/member_detail.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+
+<header>
+  <!-- parent -->
+  <nav class="nav">
+    <!-- child 1 -->
+    <div class="nav-list-1">
+      <i class="fa-solid fa-dumbbell"></i>
+      <a id="goBackLink" href="{% url 'home' %}"><h1>Django Gym</h1></a>
+    </div>
+    <!-- child 2 -->
+    <div class="nav-list-2">
+      <form id="searchForm" method="POST" action="{% url 'search_member' %}">
+        {% csrf_token %}
+        <input id="searchInput" type="search" placeholder="Search Member" aria-label="Search" name="searched">
+        <button id="searchButton" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
+<body>
+  <div class="container">
+    <h1 style="color: black; margin-left: 10%;"> Details of <span style="color: #0aee85;">{{ member.member_name }}</span></h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Parent Name</td>
+          <td>{{ member.parent_name }}</td>
+        </tr>
+        <tr>
+          <th>CNIC Number</th>
+          <td>{{ member.cnic_no }}</td>
+        </tr>
+        <tr>
+          <th>Date of Birth</th>
+          <td>{{ member.DOB|date:"M d, Y" }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ member.email }}</td>
+        </tr>
+        <tr>
+          <th>Mobile Number</th>
+          <td>{{ member.mobile_number }}</td>
+        </tr>
+        <tr>
+          <th>Occupation</th>
+          <td>{{ member.occupation }}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{ member.address }}</td>
+        </tr>
+        <tr>
+          <th>Reference</th>
+          <td>{{ member.reference }}</td>
+        </tr>
+        <tr>
+          <th>Gender</th>
+          <td>{{ member.gender }}</td>
+        </tr>
+        <tr>
+          <th>Blood Group</th>
+          <td>{{ member.blood_group }}</td>
+        </tr>
+        <tr>
+          <th>Member Timings</th>
+          <td>{{ member.member_timings }}</td>
+        </tr>
+        <tr>
+          <th>Height (cm)</th>
+          <td>{{ member.height_cm }}</td>
+        </tr>
+        <tr>
+          <th>Weight (KG)</th>
+          <td>{{ member.weight_kg }}</td>
+        </tr>
+        <tr>
+          <th>Admission Fee</th>
+          <td>{{ member.admission_fee }}</td>
+        </tr>
+        <tr>
+          <th>Monthly Fee</th>
+          <td>{{ member.monthly_fee }}</td>
+        </tr>
+        <tr>
+          <th>Trainer Name</th>
+          <td>{{ member.trainer_name }}</td>
+        </tr>
+        <tr>
+          <th>Trainer Fee</th>
+          <td>{{ member.trainer_fee }}</td>
+        </tr>
+        <tr>
+          <th>Starting Date</th>
+          <td>{{ member.starting_date }}</td>
+        </tr>
+        <tr>
+          <th>Admission Date</th>
+          <td>{{ member.admission_date }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+</body>
+{% endblock %}

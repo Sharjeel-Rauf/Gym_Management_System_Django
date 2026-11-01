@@ -1,0 +1,40 @@
+<!-- record_attendance.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+<header>
+    <!-- parent -->
+        <nav class ="nav">
+            <!-- child 1 -->
+            <div class = "nav-list-1">
+            <i class="fa-solid fa-dumbbell"></i>
+            <a id="goBackLink" href="{% url 'home' %}"><h1>Django Gym</h1></a>
+            </div>
+        </nav>
+</header>
+<body class="body-create-form">
+    <div class="form-container">
+        <h2 class="form-title">Record Attendance</h2>
+
+    <form method="post" action="{% url 'record_attendance' %}" class="custom-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.member.id_for_label }}">Member:</label>
+            {{ form.member }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.date.id_for_label }}">Date:</label>
+            <input type="date" name="{{form.date.name}}" >
+        </div>
+        <div class="form-group">
+            <label for="{{ form.present.id_for_label }}">Present:</label>
+            {{ form.present }}
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    </div>
+</body>
+{% endblock %}

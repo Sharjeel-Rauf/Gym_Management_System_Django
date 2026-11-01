@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Naviagtion bar 1 -->
+<header>
+    <!-- parent -->
+        <nav class ="nav">
+            <!-- child 1 -->
+            <div class = "nav-list-1">
+            <i class="fa-solid fa-dumbbell"></i>
+            <h1>Django Gym</h1>
+            </div>
+            <!-- child 2 -->
+            <div class = "nav-list-2">
+                <form id="searchForm" method="POST" action="{% url 'search_member' %}">
+                    {% csrf_token %}
+                    <input id="searchInput" type="search" placeholder="Search Member" aria-label="Search" name="searched">
+                    <button id="searchButton" type="submit">Search</button>
+                </form>
+                <a href="{% url 'record_attendance' %}" class = ""> Attendence </a>
+                <a href="{% url 'logout_user' %}"> Logout </a>     
+            </div>
+        </nav>
+</header>
+
+
+{% if user.is_authenticated %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>Last Fee Date</th>
+                <th>Attendence Status</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in memberships %}
+            <tr>
+               
+                <td>igf_00{{ member.id }}</td>
+                <td>{{ member.member_name }}</td>
+                <td>{{ member.starting_date|date:"M. d, Y" }}</td>
+                <td><a href="{% url 'monthly_attendance' member.id %}" class="actions"><i class="fa-solid fa-calendar-days"></i></a></td>
+                    <!-- <td>
+                        {% for attendance in attendance_list %}
+                            {% if attendance.present == True %}
+                                <p>Present</p>
+                            {% endif %}
+                        {% endfor %}
+                    </td> -->
+                
+                <td><a href="{% url 'delete_member' member.id %}" class="actions"><i class="fa-solid fa-xmark"></i></a></td>
+                <td><a href="{% url 'update_member' member.id %}" class="actions-1"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                <td><a href="{% url 'member_detail' member.id %}" class="actions-1"><i class="fa-solid fa-circle-info"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'create_member' %}" class="add_button">➕</a>
+
+
+
+<div class="pagination-container">
+    {% if memberships.has_previous %}
+        <a href="?page=1" class="pagination-link">&laquo; First</a>
+        <a href="?page={{ memberships.previous_page_number }}" class="pagination-link">Previous</a>
+    {% endif %}
+
+    <span class="page-info">Page {{ memberships.number }} of {{ memberships.paginator.num_pages }}</span>
+
+    {% if memberships.has_next %}
+        <a href="?page={{ memberships.next_page_number }}" class="pagination-link">Next</a>
+        <a href="?page={{ memberships.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+    {% endif %}
+</div>
+
+
+{% else %}
+<!-- Login button -->
+    <a href="{% url 'login_user' %}" class="login-button">Login</a>
+{% endif %}
+
+
+{% endblock %}
